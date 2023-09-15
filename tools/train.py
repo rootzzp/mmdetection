@@ -130,4 +130,42 @@ def main():
 
 
 if __name__ == '__main__':
+    import sys
+
+    sys.argv = ["tools/train.py",
+                "configs/yolo/yolov3_d53_8xb8-ms-608-273e_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/yolox/yolox_s_8x8_300e_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/yolof/yolof_r50_c5_8x8_1x_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/centernet/centernet_resnet18_dcnv2_140e_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/cornernet/cornernet_hourglass104_mstest_8x6_210e_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/fcos/fcos_r50_caffe_fpn_gn-head_1x_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/solo/solo_r50_fpn_1x_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/retinanet/retinanet_r18_fpn_1x8_1x_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/detr/detr_r50_8x2_150e_coco.py"]
+
+    # sys.argv = ["tools/train.py",
+    #             "configs/yolo/yolov5_cspd53_mstrain-608_273e_cover_plate.py"]
+    
+    # sys.argv = ["tools/train.py",
+    #             "configs/yolo/yolov5_cspd53_8xb8-ms-608-273e_coco.py"]
+
     main()
