@@ -7,47 +7,57 @@ data_preprocessor = dict(
     bgr_to_rgb=True,
     pad_size_divisor=32)
 model = dict(
-    type='YOLOV3',
+    type='YOLOV5',
     data_preprocessor=data_preprocessor,
     backbone=dict(
-        type='Darknet',
-        depth=53,
-        out_indices=(3, 4, 5),
-        init_cfg=dict(type='Pretrained', checkpoint='open-mmlab://darknet53')),
+        type='YOLOv5CSPDarknet',
+        deepen_factor=0.33,
+        widen_factor=0.5,
+        norm_cfg=dict(type='BN', momentum=0.03, eps=0.001),
+        act_cfg=dict(type='SiLU', inplace=True)),
     neck=dict(
-        type='YOLOV3Neck',
-        num_scales=3,
-        in_channels=[1024, 512, 256],
-        out_channels=[512, 256, 128]),
+        type='YOLOv5PAFPN',
+        deepen_factor=0.33,
+        widen_factor=0.5,
+        in_channels=[256, 512, 1024],
+        out_channels=[256, 512, 1024],
+        num_csp_blocks=3,
+        norm_cfg=dict(type='BN', momentum=0.03, eps=0.001),
+        act_cfg=dict(type='SiLU', inplace=True)),
     bbox_head=dict(
-        type='YOLOV3Head',
-        num_classes=80,
-        in_channels=[512, 256, 128],
-        out_channels=[1024, 512, 256],
+        type='YOLOv5Head',  
+        head_module=dict(
+            type='YOLOv5HeadModule',
+            num_classes=80,
+            in_channels=[256, 512, 1024],
+            widen_factor=0.5,
+            featmap_strides=[8, 16, 32],
+            num_base_priors=3),
         anchor_generator=dict(
             type='YOLOAnchorGenerator',
             base_sizes=[[(116, 90), (156, 198), (373, 326)],
                         [(30, 61), (62, 45), (59, 119)],
                         [(10, 13), (16, 30), (33, 23)]],
             strides=[32, 16, 8]),
-        bbox_coder=dict(type='YOLOBBoxCoder'),
-        featmap_strides=[32, 16, 8],
+        bbox_coder=dict(type='YOLOv5BBoxCoder'),
         loss_cls=dict(
             type='CrossEntropyLoss',
             use_sigmoid=True,
-            loss_weight=1.0,
-            reduction='sum'),
-        loss_conf=dict(
+            reduction='mean',
+            loss_weight=0.5),
+        loss_bbox=dict(
+            type='YoloV5IoULoss',
+            iou_mode='ciou',
+            eps=1e-07,
+            reduction='mean',
+            loss_weight=0.05),
+        loss_obj=dict(
             type='CrossEntropyLoss',
             use_sigmoid=True,
-            loss_weight=1.0,
-            reduction='sum'),
-        loss_xy=dict(
-            type='CrossEntropyLoss',
-            use_sigmoid=True,
-            loss_weight=2.0,
-            reduction='sum'),
-        loss_wh=dict(type='MSELoss', loss_weight=2.0, reduction='sum')),
+            reduction='mean',
+            loss_weight=1.0),
+        prior_match_thr=4.0,
+        obj_level_weights=[4.0, 1.0, 0.4]),
     # training and testing settings
     train_cfg=dict(
         assigner=dict(
@@ -109,8 +119,8 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=8,
-    num_workers=4,
+    batch_size=4,
+    num_workers=1,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     batch_sampler=dict(type='AspectRatioBatchSampler'),
@@ -124,7 +134,7 @@ train_dataloader = dict(
         backend_args=backend_args))
 val_dataloader = dict(
     batch_size=1,
-    num_workers=2,
+    num_workers=1,
     persistent_workers=True,
     drop_last=False,
     sampler=dict(type='DefaultSampler', shuffle=False),
