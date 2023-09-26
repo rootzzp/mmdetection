@@ -8,6 +8,7 @@ from .legacy_delta_xywh_bbox_coder import LegacyDeltaXYWHBBoxCoder
 from .pseudo_bbox_coder import PseudoBBoxCoder
 from .tblr_bbox_coder import TBLRBBoxCoder
 from .yolo_bbox_coder import YOLOBBoxCoder
+from .yolo_v5_bbox_coder import YOLOv5BBoxCoder
 
 __all__ = [
     'BaseBBoxCoder', 'PseudoBBoxCoder', 'DeltaXYWHBBoxCoder',

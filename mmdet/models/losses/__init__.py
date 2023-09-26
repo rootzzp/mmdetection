@@ -23,6 +23,7 @@ from .smooth_l1_loss import L1Loss, SmoothL1Loss, l1_loss, smooth_l1_loss
 from .triplet_loss import TripletLoss
 from .utils import reduce_loss, weight_reduce_loss, weighted_loss
 from .varifocal_loss import VarifocalLoss
+from .yolo_v5_iou_loss import YoloV5IoULoss
 
 __all__ = [
     'accuracy', 'Accuracy', 'cross_entropy', 'binary_cross_entropy',
@@ -35,5 +36,5 @@ __all__ = [
     'carl_loss', 'AssociativeEmbeddingLoss', 'GaussianFocalLoss',
     'QualityFocalLoss', 'DistributionFocalLoss', 'VarifocalLoss',
     'KnowledgeDistillationKLDivLoss', 'SeesawLoss', 'DiceLoss', 'EQLV2Loss',
-    'MarginL2Loss', 'MultiPosCrossEntropyLoss', 'L2Loss', 'TripletLoss'
+    'MarginL2Loss', 'MultiPosCrossEntropyLoss', 'L2Loss', 'TripletLoss','YoloV5IoULoss'
 ]
