@@ -132,8 +132,8 @@ def main():
 if __name__ == '__main__':
     import sys
 
-    sys.argv = ["tools/train.py",
-                "configs/yolo/yolov3_d53_8xb8-ms-608-273e_coco.py"]
+    # sys.argv = ["tools/train.py",
+    #             "configs/yolo/yolov3_d53_8xb8-ms-608-273e_coco.py"]
 
     # sys.argv = ["tools/train.py",
     #             "configs/yolox/yolox_s_8x8_300e_coco.py"]
@@ -161,11 +161,11 @@ if __name__ == '__main__':
 
     # sys.argv = ["tools/train.py",
     #             "configs/detr/detr_r50_8x2_150e_coco.py"]
-
-    # sys.argv = ["tools/train.py",
-    #             "configs/yolo/yolov5_cspd53_mstrain-608_273e_cover_plate.py"]
     
     # sys.argv = ["tools/train.py",
     #             "configs/yolo/yolov5_cspd53_8xb8-ms-608-273e_coco.py"]
+
+    sys.argv = ["tools/train.py",
+                "configs/yolo/yolov5_cspd53_mstrain-608_273e_cover_plate.py"]
 
     main()
