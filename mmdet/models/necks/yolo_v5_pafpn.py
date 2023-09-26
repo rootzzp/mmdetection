@@ -69,6 +69,7 @@ class YOLOv5PAFPN(BaseModule):
         self.num_csp_blocks = num_csp_blocks
         self.norm_cfg = norm_cfg
         self.act_cfg = act_cfg
+        self.upsample_feats_cat_first = upsample_feats_cat_first
 
         conv = DepthwiseSeparableConvModule if use_depthwise else ConvModule
 
