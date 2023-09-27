@@ -35,10 +35,10 @@ model = dict(
             num_base_priors=3),
         anchor_generator=dict(
             type='YOLOAnchorGenerator',
-            base_sizes=[[(116, 90), (156, 198), (373, 326)],
+            base_sizes=[[(10, 13), (16, 30), (33, 23)],
                         [(30, 61), (62, 45), (59, 119)],
-                        [(10, 13), (16, 30), (33, 23)]],
-            strides=[32, 16, 8]),
+                        [(116, 90), (156, 198), (373, 326)]],
+            strides=[8, 16, 32]),
         bbox_coder=dict(type='YOLOv5BBoxCoder'),
         loss_cls=dict(
             type='CrossEntropyLoss',
@@ -155,12 +155,12 @@ val_evaluator = dict(
     backend_args=backend_args)
 test_evaluator = val_evaluator
 
-train_cfg = dict(max_epochs=273, val_interval=7)
+train_cfg = dict(max_epochs=273, val_interval=10)
 
 # optimizer
 optim_wrapper = dict(
     type='OptimWrapper',
-    optimizer=dict(type='SGD', lr=0.001, momentum=0.9, weight_decay=0.0005),
+    optimizer=dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0005),
     clip_grad=dict(max_norm=35, norm_type=2))
 
 # learning policy
@@ -174,4 +174,4 @@ default_hooks = dict(checkpoint=dict(type='CheckpointHook', interval=7))
 # NOTE: `auto_scale_lr` is for automatically scaling LR,
 # USER SHOULD NOT CHANGE ITS VALUES.
 # base_batch_size = (8 GPUs) x (8 samples per GPU)
-auto_scale_lr = dict(base_batch_size=64)
+auto_scale_lr = dict(base_batch_size=4)
