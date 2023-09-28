@@ -198,47 +198,6 @@ class YOLOv5PAFPN(BaseModule):
     def build_out_layer(self, *args, **kwargs) -> nn.Module:
         """build out layer."""
         return nn.Identity()
-
-    # def forward(self, inputs):
-    #     """
-    #     Args:
-    #         inputs (tuple[Tensor]): input features.
-
-    #     Returns:
-    #         tuple[Tensor]: YOLOXPAFPN features.
-    #     """
-    #     assert len(inputs) == len(self.in_channels)
-
-    #     # top-down path
-    #     inner_outs = [inputs[-1]]
-    #     for idx in range(len(self.in_channels) - 1, 0, -1):
-    #         feat_heigh = inner_outs[0]
-    #         feat_low = inputs[idx - 1]
-    #         feat_heigh = self.reduce_layers[len(self.in_channels) - 1 - idx](
-    #             feat_heigh)
-    #         inner_outs[0] = feat_heigh
-
-    #         upsample_feat = self.upsample(feat_heigh)
-
-    #         inner_out = self.top_down_blocks[len(self.in_channels) - 1 - idx](
-    #             torch.cat([upsample_feat, feat_low], 1))
-    #         inner_outs.insert(0, inner_out)
-
-    #     # bottom-up path
-    #     outs = [inner_outs[0]]
-    #     for idx in range(len(self.in_channels) - 1):
-    #         feat_low = outs[-1]
-    #         feat_height = inner_outs[idx + 1]
-    #         downsample_feat = self.downsamples[idx](feat_low)
-    #         out = self.bottom_up_blocks[idx](
-    #             torch.cat([downsample_feat, feat_height], 1))
-    #         outs.append(out)
-
-    #     # out convs
-    #     for idx, conv in enumerate(self.out_convs):
-    #         outs[idx] = conv(outs[idx])
-
-    #     return tuple(outs)
     
     def forward(self, inputs):
         """Forward function."""
