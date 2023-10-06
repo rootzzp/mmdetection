@@ -136,7 +136,7 @@ if __name__ == '__main__':
     #             "configs/yolo/yolov3_d53_8xb8-ms-608-273e_coco.py"]
 
     # sys.argv = ["tools/train.py",
-    #             "configs/yolox/yolox_s_8x8_300e_coco.py"]
+    #             "configs/yolox/yolox_s_8xb8-300e_coco.py"]
 
     # sys.argv = ["tools/train.py",
     #             "configs/yolof/yolof_r50_c5_8x8_1x_coco.py"]
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     # sys.argv = ["tools/train.py",
     #             "configs/yolo/yolov5_cspd53_8xb8-ms-608-273e_coco.py"]
 
-    sys.argv = ["tools/train.py",
-                "configs/yolo/yolov5_cspd53_mstrain-608_273e_cover_plate.py"]
+    # sys.argv = ["tools/train.py",
+    #             "configs/yolo/yolov5_cspd53_mstrain-608_273e_cover_plate.py"]
 
     main()
